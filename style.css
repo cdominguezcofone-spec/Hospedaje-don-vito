@@ -62,7 +62,7 @@ header {
     color: var(--primary);
 }
 
-/* Hero & Carousel mejorado por JS */
+/* Hero / Slider con JS */
 .hero {
     position: relative;
     height: 80vh;
@@ -164,11 +164,11 @@ header {
 }
 
 .welcome-img-box {
-    margin-top: 30px; 
-    border-radius: 8px; 
-    overflow: hidden; 
-    height: 400px; 
-    background-size: cover; 
+    margin-top: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 400px;
+    background-size: cover;
     background-position: center;
 }
 
@@ -334,7 +334,6 @@ footer {
     margin-top: 40px;
 }
 
-/* Responsive para celulares */
 @media (max-width: 768px) {
     .hero-title { font-size: 36px; }
     .hero-subtitle { font-size: 18px; }
