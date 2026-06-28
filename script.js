@@ -27,7 +27,7 @@ form.addEventListener('submit', function(e) {
         total: totalPriceSpan.innerText
     };
 
-    // URL de Google Apps Script integrada con éxito
+    // URL de tu Google Apps Script integrada con éxito
     const urlAppScript = 'https://script.google.com/macros/s/AKfycbx94_XNqidK7DOAH7vwei9gvV_ZpbXPVyrYNfKVo4WQpSnVvw74Dw0AkCO44XPjo_Nw/exec';
 
     fetch(urlAppScript, {
