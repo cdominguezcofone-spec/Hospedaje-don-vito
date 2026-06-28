@@ -319,6 +319,15 @@
             background-color: var(--primary-dark);
         }
 
+        /* Comments Section */
+        .comments-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            margin-bottom: 60px;
+        }
+
         footer {
             background-color: var(--primary-dark);
             color: var(--white);
@@ -343,6 +352,7 @@
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#galeria">Instalaciones</a></li>
                 <li><a href="#informacion">Información</a></li>
+                <li><a href="#opiniones">Opiniones</a></li>
                 <li><a href="#ubicacion">Ubicación</a></li>
             </ul>
         </nav>
@@ -394,6 +404,10 @@
                     <h3>Salamandra a Leña</h3>
                     <p>Calidez acogedora para los días frescos.</p>
                 </div>
+                <div class="feature-card">
+                    <h3>Aire Acondicionado</h3>
+                    <p>Ambiente climatizado para tu mayor confort.</p>
+                </div>
             </div>
         </section>
 
@@ -412,7 +426,7 @@
                 <div class="gallery-item">
                     <img class="gallery-img" src="https://lh3.googleusercontent.com/d/1VlyD8bBr6hF9TmUOMPCRZaoKuKo-30wA" alt="Piscina 2">
                     <div class="gallery-info">
-                        <h4>Espejo de Agua</h4>
+                        <h4>Espacio de Relax</h4>
                         <p>Momentos de relax rodeados de verde.</p>
                     </div>
                 </div>
@@ -492,7 +506,7 @@
                 <div class="gallery-item">
                     <img class="gallery-img" src="https://lh3.googleusercontent.com/d/1jz2xU264hbogyjA5Q7ViiBhmYBUSmjDj" alt="Dormitorio 2">
                     <div class="gallery-info">
-                        <h4>Segundo Dormitorio</h4>
+                        <h4>Dormitorio</h4>
                         <p>Ambientes luminosos, limpios y perfectamente equipados.</p>
                     </div>
                 </div>
@@ -574,7 +588,7 @@
             </div>
 
             <div class="info-box">
-                <h3>Lugares para Conocer</h3>
+                <h3>Lugares para Con conocer</h3>
                 <ul class="info-list">
                     <li><span class="label">San Andrés de Giles:</span> <span>13 km</span></li>
                     <li><span class="label">Carlos Keen:</span> <span>16 km</span></li>
@@ -591,6 +605,25 @@
                     <li><span class="label">Para Comer:</span> <span>Recomendamos visitar Casa Gallo</span></li>
                 </ul>
             </div>
+        </section>
+
+        <!-- Nueva Sección de Comentarios -->
+        <section id="opiniones" class="comments-section">
+            <h2 class="section-title">Opiniones de nuestros Huéspedes</h2>
+            <div id="disqus_thread"></div>
+            <script>
+                var disqus_config = function () {
+                    this.page.url = "PAGE_URL_DE_TU_WEB"; 
+                    this.page.identifier = "don_vito_home"; 
+                };
+                (function() { 
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://donvito-cucullu.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Por favor habilita JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios respaldados por Disqus.</a></noscript>
         </section>
 
         <section id="ubicacion" class="map-section">
