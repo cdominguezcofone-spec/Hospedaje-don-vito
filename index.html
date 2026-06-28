@@ -319,13 +319,112 @@
             background-color: var(--primary-dark);
         }
 
-        /* Comments Section */
+        /* --- NUEVOS ESTILOS PARA COMENTARIOS --- */
         .comments-section {
             background: var(--white);
-            padding: 40px;
+            padding: 40px 30px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.04);
             margin-bottom: 60px;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            background: var(--bg-light);
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .comment-form h3 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        .rating-stars {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 5px;
+        }
+
+        .rating-stars input {
+            display: none;
+        }
+
+        .rating-stars label {
+            font-size: 30px;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .rating-stars input:checked ~ label,
+        .rating-stars label:hover,
+        .rating-stars label:hover ~ label {
+            color: #ffc107;
+        }
+
+        .btn-submit {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .comments-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .comment-card {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .comment-name {
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .comment-stars {
+            color: #ffc107;
+            font-size: 18px;
+        }
+
+        .comment-text {
+            color: #555;
+            font-size: 15px;
         }
 
         footer {
@@ -588,7 +687,7 @@
             </div>
 
             <div class="info-box">
-                <h3>Lugares para Con conocer</h3>
+                <h3>Lugares para Conocer</h3>
                 <ul class="info-list">
                     <li><span class="label">San Andrés de Giles:</span> <span>13 km</span></li>
                     <li><span class="label">Carlos Keen:</span> <span>16 km</span></li>
@@ -607,23 +706,28 @@
             </div>
         </section>
 
-        <!-- Nueva Sección de Comentarios -->
         <section id="opiniones" class="comments-section">
             <h2 class="section-title">Opiniones de nuestros Huéspedes</h2>
-            <div id="disqus_thread"></div>
-            <script>
-                var disqus_config = function () {
-                    this.page.url = "PAGE_URL_DE_TU_WEB"; 
-                    this.page.identifier = "don_vito_home"; 
-                };
-                (function() { 
-                    var d = document, s = d.createElement('script');
-                    s.src = 'https://donvito-cucullu.disqus.com/embed.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            </script>
-            <noscript>Por favor habilita JavaScript para ver los <a href="https://disqus.com/?ref_noscript">comentarios respaldados por Disqus.</a></noscript>
+            
+            <form class="comment-form" id="reviewForm">
+                <h3>Dejanos tu comentario</h3>
+                <input type="text" id="formNombre" placeholder="Tu Nombre" required>
+                
+                <div class="rating-stars">
+                    <input type="radio" id="star5" name="puntuacion" value="5" required><label for="star5">★</label>
+                    <input type="radio" id="star4" name="puntuacion" value="4"><label for="star4">★</label>
+                    <input type="radio" id="star3" name="puntuacion" value="3"><label for="star3">★</label>
+                    <input type="radio" id="star2" name="puntuacion" value="2"><label for="star2">★</label>
+                    <input type="radio" id="star1" name="puntuacion" value="1"><label for="star1">★</label>
+                </div>
+                
+                <textarea id="formComentario" rows="4" placeholder="¿Cómo fue tu experiencia en Don Vito?" required></textarea>
+                <button type="submit" class="btn-submit" id="btnEnviar">Enviar Comentario</button>
+            </form>
+
+            <div class="comments-list" id="listaComentarios">
+                <p style="text-align:center; color:#888;">Cargando opiniones...</p>
+            </div>
         </section>
 
         <section id="ubicacion" class="map-section">
@@ -638,5 +742,75 @@
         <p>© 2026 Don Vito - Casa de Huéspedes en Cucullú. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        // ⚠️ PEGA AQUÍ TU URL COMPLETA DE GOOGLE APPS SCRIPT (TERMINADA EN /exec)
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3WC_r09cgXhY9w62anj5ig-DOGQuEyy-J2o-xgc6P7ujqYjHwWyviS08j_MP-q_U/exec';
+
+        // Función para cargar comentarios desde la planilla
+        async function cargarComentarios() {
+            const lista = document.getElementById('listaComentarios');
+            try {
+                const respuesta = await fetch(SCRIPT_URL);
+                const comentarios = await respuesta.json();
+                
+                if(comentarios.length === 0) {
+                    lista.innerHTML = '<p style="text-align:center; color:#888;">Todavía no hay opiniones. ¡Sé el primero!</p>';
+                    return;
+                }
+
+                lista.innerHTML = '';
+                comentarios.forEach(c => {
+                    let estrellas = '★'.repeat(c.puntuacion) + '☆'.repeat(5 - c.puntuacion);
+                    
+                    const card = document.createElement('div');
+                    card.className = 'comment-card';
+                    card.innerHTML = `
+                        <div class="comment-header">
+                            <span class="comment-name">${c.nombre}</span>
+                            <span class="comment-stars">${estrellas}</span>
+                        </div>
+                        <p class="comment-text">${c.comentario}</p>
+                    `;
+                    lista.appendChild(card);
+                });
+            } catch (error) {
+                lista.innerHTML = '<p style="text-align:center; color:red;">No se pudieron cargar las opiniones.</p>';
+            }
+        }
+
+        // Evento para enviar un nuevo comentario
+        document.getElementById('reviewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnEnviar');
+            btn.disabled = true;
+            btn.innerText = 'Enviando...';
+
+            const nombre = document.getElementById('formNombre').value;
+            const comentario = document.getElementById('formComentario').value;
+            const puntuacion = document.querySelector('input[name="puntuacion"]:checked').value;
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Requerido por restricciones de Google Apps Script
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre, comentario, puntuacion: parseInt(puntuacion) })
+                });
+
+                // Limpiar formulario y recargar
+                document.getElementById('reviewForm').reset();
+                alert('¡Muchas gracias por tu opinión!');
+                setTimeout(cargarComentarios, 1000); // Pequeña espera para dar tiempo a la escritura
+            } catch (error) {
+                alert('Hubo un error al enviar tu comentario.');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Enviar Comentario';
+            }
+        });
+
+        // Cargar las opiniones inmediatamente al abrir la página
+        window.addEventListener('DOMContentLoaded', cargarComentarios);
+    </script>
 </body>
 </html>
