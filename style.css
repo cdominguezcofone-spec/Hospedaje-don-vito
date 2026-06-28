@@ -45,21 +45,10 @@ header {
     letter-spacing: 1px;
 }
 
-/* MENÚ CON SCROLL HORIZONTAL */
 .nav-links {
     display: flex;
     list-style: none;
     gap: 20px;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: 5px;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch; /* Suaviza el scroll en iOS */
-}
-
-/* Oculta la barra de scroll en navegadores basados en Webkit */
-.nav-links::-webkit-scrollbar {
-    display: none; 
 }
 
 .nav-links a {
@@ -439,7 +428,7 @@ footer {
     margin-top: 40px;
 }
 
-/* ADAPTACIÓN CELULARES */
+/* --- ADAPTACIÓN CELULARES (MENÚ VERTICAL CONFIRMADO) --- */
 @media (max-width: 768px) {
     .hero-title { font-size: 36px; }
     .hero-subtitle { font-size: 18px; }
@@ -447,13 +436,27 @@ footer {
     .nav-container { 
         flex-direction: column; 
         gap: 15px; 
-        padding: 15px 5px;
+        padding: 15px 20px;
     }
     
     .nav-links {
+        flex-direction: column; /* Apila los botones de arriba hacia abajo */
         width: 100%;
-        justify-content: flex-start;
-        padding-left: 10px;
-        padding-right: 10px;
+        align-items: center;
+        gap: 10px; /* Separación cómoda entre links */
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px 0;
+        background-color: var(--bg-light); /* Fondo suave estilo botón */
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
     }
 }
