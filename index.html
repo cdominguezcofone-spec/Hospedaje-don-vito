@@ -4,297 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Don Vito | Casa de Huéspedes en Cucullú</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        .hero {
-            position: relative !important;
-            height: 55vh !important;
-            min-height: 380px !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            color: white !important;
-            overflow: hidden !important;
-            background-color: #1a202c !important;
-        }
-        .slider-container {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            z-index: 1 !important;
-        }
-        .slide {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-            object-position: center center !important;
-            opacity: 0 !important;
-            transition: opacity 1.2s ease-in-out !important;
-        }
-        .slide.active {
-            opacity: 1 !important;
-        }
-        .hero-overlay {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            background: rgba(0, 0, 0, 0.45) !important;
-            z-index: 2 !important;
-        }
-        .hero-content {
-            position: relative !important;
-            z-index: 3 !important;
-            padding: 0 20px !important;
-        }
+        /* Estilos generales básicos */
+        body { font-family: sans-serif; margin: 0; line-height: 1.6; }
+        .hero { position: relative; height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; overflow: hidden; background: #333; }
+        .slider-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .slide { position: absolute; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1s; }
+        .slide.active { opacity: 1; }
+        .hero-content { position: relative; z-index: 3; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; }
+        
+        .section-campo { padding: 50px 20px; text-align: center; background: #f9f9f9; }
+        .section-campo img { max-width: 100%; height: auto; border-radius: 10px; margin-bottom: 20px; }
+        
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; padding: 20px; }
+        .gallery-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; cursor: pointer; }
 
-        /* SECCIÓN DE COMENTARIOS Y ESTRELLAS */
-        .reviews-section {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 25px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .rating-input {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
-        }
-        .star {
-            font-size: 30px;
-            color: #cbd5e0;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .star.selected, .star:hover {
-            color: #ecc94b;
-        }
-        .comments-display {
-            margin-top: 30px;
-            border-top: 2px solid #edf2f7;
-            padding-top: 20px;
-        }
-        .comment-card {
-            background: #f7fafc;
-            border: 1px solid #e2e8f0;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-        }
-        .comment-name {
-            font-weight: bold;
-            color: #2d3748;
-        }
-        .comment-stars {
-            color: #ecc94b;
-            font-size: 18px;
-        }
-        .comment-text {
-            color: #4a5568;
-            margin: 0;
-            font-size: 0.95rem;
-        }
-        .textarea-comment {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
-            box-sizing: border-box;
-            resize: vertical;
-            min-height: 80px;
-            font-family: inherit;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .whatsapp-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; z-index: 100; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
 
     <header class="hero">
         <div class="slider-container">
-            <img class="slide active" src="https://docs.google.com/thumbnail?id=1twuKLO-VMEDWHzejfjAVJtrgzXQSzOAf&sz=w1600" alt="Portada Don Vito">
+            <img class="slide active" src="https://lh3.googleusercontent.com/d/1twuKLO-VMEDWHzejfjAVJtrgzXQSzOAf" alt="Portada">
+            <img class="slide" src="https://lh3.googleusercontent.com/d/1eIOXHBZiBnxcQvV4RAvuNSWJY8rxmPWO" alt="Entrada">
         </div>
-        <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>Don Vito</h1>
-            <h2>Casa de Huéspedes</h2>
-            <p>Tu refugio de descanso en Cucullú</p>
+            <p>Casa de Huéspedes en Cucullú</p>
         </div>
     </header>
 
+    <section class="section-campo">
+        <img src="https://lh3.googleusercontent.com/d/1g-bc8PqV-pQv7l8rSlSnxy9YbGJ5aQ4U" alt="Campo">
+        <h2>Sentite en el campo disfrutando de la naturaleza</h2>
+        <p>Un lugar ideal para descansar y conectar con el aire libre.</p>
+    </section>
+
     <section class="about">
-        <h2>Bienvenidos a Don Vito</h2>
-        <p>Ubicada en el tranquilo entorno de Cucullú, nuestra casa de huéspedes te ofrece una estadía de descanso con <strong>aire acondicionado y wifi gratis</strong>. Contamos con <strong>parking privado gratuito</strong> para mayor comodidad durante tu visita.</p>
+        <h2 style="text-align: center;">Bienvenidos</h2>
+        <p style="max-width: 800px; margin: auto; padding: 20px;">Ubicada en el tranquilo entorno de Cucullú, nuestra casa te ofrece una estadía de descanso. Contamos con <strong>aire acondicionado, wifi, parking</strong> y el calor hogareño de nuestra <strong>salamandra a leña</strong> para que disfrutes de tu estadía en cualquier época del año.</p>
     </section>
 
     <section class="gallery">
-        <h3>Nuestras Instalaciones</h3>
+        <h3 style="text-align: center;">Nuestras Instalaciones</h3>
         <div class="gallery-grid">
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1I5qn9ZdiabCoTDkoymgvLff-E8ABj8Wo&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1I5qn9ZdiabCoTDkoymgvLff-E8ABj8Wo&sz=w800" alt="Entrada Principal">
-                <p>Entrada Principal</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1k1rFS4Rb53L1Mq-6rlDGiKmLCCdeHC5G&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1k1rFS4Rb53L1Mq-6rlDGiKmLCCdeHC5G&sz=w800" alt="Fachada 2">
-                <p>Exterior de la Casa</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1BZ468sgpI1WP2y3nVAyGXBTUoO3xBh6Z&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1BZ468sgpI1WP2y3nVAyGXBTUoO3xBh6Z&sz=w800" alt="Garage">
-                <p>Parking Privado</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1_duNvq6ehREPGPxv-yeVoG2Mw5WkcNgb&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1_duNvq6ehREPGPxv-yeVoG2Mw5WkcNgb&sz=w800" alt="Living">
-                <p>Zona de Estar / Living</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=10eHOdm7vVeLEKzdgzh5tqHOYRZT522mo&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=10eHOdm7vVeLEKzdgzh5tqHOYRZT522mo&sz=w800" alt="Comedor 1">
-                <p>Comedor Integrado</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1aUfr3MRWY01pznFmAJTxVo3IGW8aMcLv&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1aUfr3MRWY01pznFmAJTxVo3IGW8aMcLv&sz=w800" alt="Comedor 2">
-                <p>Espacios Luminosos</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1bsmDY6xtSJ8gY3D13ppiOynv253aahkT&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1bsmDY6xtSJ8gY3D13ppiOynv253aahkT&sz=w800" alt="Cocina">
-                <p>Cocina Completa</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1quSjYX8mDlBgkZ9XKl0Qsy1_TYXyBjfn&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1quSjYX8mDlBgkZ9XKl0Qsy1_TYXyBjfn&sz=w800" alt="Baño">
-                <p>Baño Completo con Bidet</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1qYjklR9twbhLw7tj9oMPB02Jc4Lpx_U2&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1qYjklR9twbhLw7tj9oMPB02Jc4Lpx_U2&sz=w800" alt="Dormitorio 1">
-                <p>Dormitorio Principal</p>
-            </div>
-            <div class="gallery-item lightbox-trigger" data-full="https://docs.google.com/thumbnail?id=1jz2xU264hbogyjA5Q7ViiBhmYBUSmjDj&sz=w1200">
-                <img src="https://docs.google.com/thumbnail?id=1jz2xU264hbogyjA5Q7ViiBhmYBUSmjDj&sz=w800" alt="Dormitorio 2">
-                <p>Habitación Climatizada</p>
-            </div>
+            <img src="https://lh3.googleusercontent.com/d/1YXcnvEUyc5zhC2h-Gc6ebliE-bmpJaFe" alt="Galería 1">
+            <img src="https://lh3.googleusercontent.com/d/16GCQwkMsQWgOP4SGdgObWvv_anQGHsgU" alt="Galería 2">
+            <img src="https://lh3.googleusercontent.com/d/1PvNF-Ip9prsam874GF6sNeyJHA0w56Z_" alt="Horno de Barro">
+            <img src="https://lh3.googleusercontent.com/d/1WrAD3h6L4s4zp8e0uTrJZZour_CwrQRe" alt="Cocina">
         </div>
     </section>
 
-    <section class="reviews-section">
-        <h3>Opiniones de nuestros Huéspedes</h3>
-        <form id="reviewForm">
-            <div class="form-group">
-                <label>Tu Calificación:</label>
-                <div class="rating-input" id="starContainer">
-                    <span class="star" data-value="1">&#9733;</span>
-                    <span class="star" data-value="2">&#9733;</span>
-                    <span class="star" data-value="3">&#9733;</span>
-                    <span class="star" data-value="4">&#9733;</span>
-                    <span class="star" data-value="5">&#9733;</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="reviewName">Nombre:</label>
-                <input type="text" id="reviewName" required placeholder="Tu nombre">
-            </div>
-            <div class="form-group">
-                <label for="reviewText">Comentario:</label>
-                <textarea id="reviewText" class="textarea-comment" required placeholder="Contanos tu experiencia en Don Vito..."></textarea>
-            </div>
-            <button type="submit" class="btn-submit" style="background-color: #2b6cb0;">Publicar Opinión</button>
-        </form>
-
-        <div class="comments-display" id="commentsContainer">
-            <h4>Reseñas Recientes</h4>
-            <div class="comment-card">
-                <div class="comment-header">
-                    <span class="comment-name">Carlos Mendoza</span>
-                    <span class="comment-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                </div>
-                <p class="comment-text">Excelente lugar para desconectar. Muy cómodo y tranquilo.</p>
-            </div>
-        </div>
-    </section>
-
-    <div id="lightbox" class="lightbox">
-        <span class="lightbox-close">&times;</span>
-        <img class="lightbox-content" id="lightbox-img" alt="Vista ampliada">
-    </div>
+    <a href="https://wa.me/5491154523758" class="whatsapp-float" target="_blank">Consultá por WhatsApp</a>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // (Scripts simplificados)
-            const slides = document.querySelectorAll('.slide');
-            let currentSlide = 0;
-            if(slides.length > 0) {
-                setInterval(() => {
-                    slides[currentSlide].classList.remove('active');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('active');
-                }, 4000);
-            }
-
-            // Lightbox
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const lightboxClose = document.querySelector('.lightbox-close');
-            const triggers = document.querySelectorAll('.lightbox-trigger');
-
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', () => {
-                    lightboxImg.src = trigger.getAttribute('data-full');
-                    lightbox.classList.add('open');
-                });
-            });
-
-            function closeBox() {
-                lightbox.classList.remove('open');
-            }
-
-            if(lightboxClose) lightboxClose.addEventListener('click', closeBox);
-            
-            // Estrellas
-            const stars = document.querySelectorAll('#starContainer .star');
-            let selectedRating = 5;
-
-            function updateStars(rating) {
-                stars.forEach((star, idx) => {
-                    star.classList.toggle('selected', idx < rating);
-                });
-            }
-
-            stars.forEach((star, idx) => {
-                star.addEventListener('click', () => {
-                    selectedRating = idx + 1;
-                    updateStars(selectedRating);
-                });
-            });
-
-            // Formulario comentarios
-            document.getElementById('reviewForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('reviewName').value;
-                const text = document.getElementById('reviewText').value;
-                const container = document.getElementById('commentsContainer');
-                const newComment = document.createElement('div');
-                newComment.className = 'comment-card';
-                newComment.innerHTML = `<div class="comment-header"><span class="comment-name">${name}</span><span class="comment-stars">${'&#9733;'.repeat(selectedRating)}</span></div><p class="comment-text">${text}</p>`;
-                container.insertBefore(newComment, container.querySelector('.comment-card'));
-                e.target.reset();
-            });
-        });
+        // Carrusel simple
+        const slides = document.querySelectorAll('.slide');
+        let i = 0;
+        setInterval(() => {
+            slides[i].classList.remove('active');
+            i = (i + 1) % slides.length;
+            slides[i].classList.add('active');
+        }, 4000);
     </script>
 </body>
 </html>
