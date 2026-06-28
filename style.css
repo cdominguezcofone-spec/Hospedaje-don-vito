@@ -428,35 +428,45 @@ footer {
     margin-top: 40px;
 }
 
-/* --- ADAPTACIÓN CELULARES (MENÚ VERTICAL CONFIRMADO) --- */
+/* --- ADAPTACIÓN DE MENÚ DESLIZABLE EN CELULARES --- */
 @media (max-width: 768px) {
     .hero-title { font-size: 36px; }
     .hero-subtitle { font-size: 18px; }
     
     .nav-container { 
         flex-direction: column; 
-        gap: 15px; 
-        padding: 15px 20px;
+        gap: 12px; 
+        padding: 15px 10px;
+        overflow: hidden; /* Evita que el contenedor rompa la pantalla */
     }
     
+    .logo {
+        margin-bottom: 2px;
+    }
+
     .nav-links {
-        flex-direction: column; /* Apila los botones de arriba hacia abajo */
+        display: flex;
+        flex-direction: row; /* Se mantienen uno al lado del otro */
         width: 100%;
-        align-items: center;
-        gap: 10px; /* Separación cómoda entre links */
+        gap: 25px; /* Espaciado cómodo entre secciones */
+        overflow-x: auto; /* Activa el arrastre horizontal */
+        white-space: nowrap; /* Fuerza a que no se bajen de renglón */
+        padding: 8px 15px;
+        -webkit-overflow-scrolling: touch; /* Hace que el deslizamiento con el dedo sea súper suave */
+    }
+
+    /* Esconde la barra gris de abajo para que quede impecable */
+    .nav-links::-webkit-scrollbar {
+        display: none;
     }
 
     .nav-links li {
-        width: 100%;
-        text-align: center;
+        display: inline-block;
     }
 
     .nav-links a {
-        display: block;
-        padding: 10px 0;
-        background-color: var(--bg-light); /* Fondo suave estilo botón */
-        border-radius: 6px;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
+        padding: 4px 2px;
     }
 }
