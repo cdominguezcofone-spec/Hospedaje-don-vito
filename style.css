@@ -6,15 +6,43 @@ body {
     background-color: #fcfbfa;
     line-height: 1.6;
 }
-/* Portada corregida con enlace compatible para fondos CSS */
+/* Contenedor principal de la portada */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('https://docs.google.com/uc?export=view&id=1twuKLO-VMEDWHzejfjAVJtrgzXQSzOAf') no-repeat center center/cover;
+    position: relative;
     height: 60vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
+    overflow: hidden;
+    background-color: #333;
+}
+/* Imagen de fondo real */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+/* Filtro oscuro para que las letras se lean perfecto */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 2;
+}
+/* Texto arriba de la foto */
+.hero-content {
+    position: relative;
+    z-index: 3;
+    padding: 0 20px;
 }
 .hero-content h1 { font-size: 3.5rem; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.6); }
 .hero-content h2 { font-size: 2rem; margin: 5px 0 15px 0; font-weight: 300; }
