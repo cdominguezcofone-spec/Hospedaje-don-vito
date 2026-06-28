@@ -5,6 +5,7 @@
     --text: #2c302e;
     --bg-light: #f7f5f0;
     --white: #ffffff;
+    --dark-nav: #1a1a1a; /* El color oscuro que se ve en la foto image_427ec7.jpg */
 }
 
 * {
@@ -21,8 +22,8 @@ body {
 }
 
 header {
-    background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    background-color: var(--dark-nav); /* Fondo oscuro como en tu captura */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -35,14 +36,35 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: var(--primary);
+    color: #dbdbd5; /* Tono claro para contrastar con el fondo oscuro */
     text-decoration: none;
     letter-spacing: 1px;
+}
+
+/* Ocultar elementos del menú interactivo en Computadoras */
+.menu-checkbox {
+    display: none;
+}
+
+.menu-button-label {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.menu-button-label span {
+    background-color: #ffffff;
+    height: 3px;
+    width: 28px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
 }
 
 .nav-links {
@@ -53,13 +75,13 @@ header {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text);
+    color: #e0e0e0;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: var(--primary);
+    color: var(--accent);
 }
 
 /* Hero / Carousel */
@@ -428,45 +450,65 @@ footer {
     margin-top: 40px;
 }
 
-/* --- ADAPTACIÓN DE MENÚ DESLIZABLE EN CELULARES --- */
+/* --- NUEVO MENÚ DESPLEGABLE EN CELULARES (RESPONSIVE) --- */
 @media (max-width: 768px) {
-    .hero-title { font-size: 36px; }
-    .hero-subtitle { font-size: 18px; }
+    .hero-title { font-size: 34px; }
+    .hero-subtitle { font-size: 16px; }
     
-    .nav-container { 
-        flex-direction: column; 
-        gap: 12px; 
-        padding: 15px 10px;
-        overflow: hidden; /* Evita que el contenedor rompa la pantalla */
-    }
-    
-    .logo {
-        margin-bottom: 2px;
+    .nav-container {
+        padding: 15px 20px;
     }
 
-    .nav-links {
+    /* Muestra el botón de hamburguesa (las 3 rayitas) */
+    .menu-button-label {
         display: flex;
-        flex-direction: row; /* Se mantienen uno al lado del otro */
-        width: 100%;
-        gap: 25px; /* Espaciado cómodo entre secciones */
-        overflow-x: auto; /* Activa el arrastre horizontal */
-        white-space: nowrap; /* Fuerza a que no se bajen de renglón */
-        padding: 8px 15px;
-        -webkit-overflow-scrolling: touch; /* Hace que el deslizamiento con el dedo sea súper suave */
+        z-index: 1002;
     }
 
-    /* Esconde la barra gris de abajo para que quede impecable */
-    .nav-links::-webkit-scrollbar {
-        display: none;
+    /* Oculta los links por defecto y los prepara en modo menú vertical */
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Aparece justo abajo de la barra negra principal */
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-nav); /* Sigue la estética negra de la cabecera */
+        padding: 10px 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        gap: 0;
+        z-index: 1001;
     }
 
     .nav-links li {
-        display: inline-block;
+        width: 100%;
+        text-align: center;
     }
 
     .nav-links a {
+        display: block;
+        padding: 15px 0;
         font-size: 16px;
-        font-weight: 600;
-        padding: 4px 2px;
+        border-bottom: 1px solid #2d2d2d; /* Separador sutil para que quede súper organizado */
+    }
+    
+    .nav-links li:last-child a {
+        border-bottom: none;
+    }
+
+    /* TRUCO CSS: Cuando tocan las rayitas (el checkbox se activa), se despliega la lista */
+    .menu-checkbox:checked ~ .nav-links {
+        display: flex;
+    }
+
+    /* Animación simple en las 3 rayitas al abrir el menú */
+    .menu-checkbox:checked ~ .menu-button-label span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    .menu-checkbox:checked ~ .menu-button-label span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-checkbox:checked ~ .menu-button-label span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
     }
 }
