@@ -12,6 +12,7 @@
             --text: #2c302e;
             --bg-light: #f7f5f0;
             --white: #ffffff;
+            --dark-nav: #1a1a1a; /* Color oscuro para la barra de navegación */
         }
 
         * {
@@ -28,8 +29,8 @@
         }
 
         header {
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: var(--dark-nav);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -42,14 +43,35 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
-            color: var(--primary);
+            color: #dbdbd5;
             text-decoration: none;
             letter-spacing: 1px;
+        }
+
+        /* Elementos del menú hamburguesa ocultos en PC */
+        .menu-checkbox {
+            display: none;
+        }
+
+        .menu-button-label {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-button-label span {
+            background-color: #ffffff;
+            height: 3px;
+            width: 28px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
         }
 
         .nav-links {
@@ -60,13 +82,13 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--text);
+            color: #e0e0e0;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--accent);
         }
 
         /* Hero / Carousel */
@@ -319,7 +341,7 @@
             background-color: var(--primary-dark);
         }
 
-        /* --- NUEVOS ESTILOS PARA COMENTARIOS --- */
+        /* Comments Section */
         .comments-section {
             background: var(--white);
             padding: 40px 30px;
@@ -435,18 +457,83 @@
             margin-top: 40px;
         }
 
+        /* --- MENÚ DESPLEGABLE EXCLUSIVO PARA CELULARES --- */
         @media (max-width: 768px) {
-            .hero-title { font-size: 36px; }
-            .hero-subtitle { font-size: 18px; }
-            .nav-container { flex-direction: column; gap: 15px; }
+            .hero-title { font-size: 34px; }
+            .hero-subtitle { font-size: 16px; }
+            
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            /* Muestra las 3 rayitas del menú hamburguesa */
+            .menu-button-label {
+                display: flex;
+                z-index: 1002;
+            }
+
+            /* Convierte la lista en un menú vertical oculto por defecto */
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-nav);
+                padding: 10px 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+                gap: 0;
+                z-index: 1001;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px 0;
+                font-size: 16px;
+                border-bottom: 1px solid #2d2d2d;
+            }
+            
+            .nav-links li:last-child a {
+                border-bottom: none;
+            }
+
+            /* Muestra el menú vertical cuando se hace clic en las 3 rayitas */
+            .menu-checkbox:checked ~ .nav-links {
+                display: flex;
+            }
+
+            /* Animación para convertir las 3 rayitas en una "X" al abrir */
+            .menu-checkbox:checked ~ .menu-button-label span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            .menu-checkbox:checked ~ .menu-button-label span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-checkbox:checked ~ .menu-button-label span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <nav class="nav-container">
+        <div class="nav-container">
             <a href="#" class="logo">DON VITO</a>
+            
+            <input type="checkbox" id="menu-toggle" class="menu-checkbox">
+            <label for="menu-toggle" class="menu-button-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
             <ul class="nav-links">
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#galeria">Instalaciones</a></li>
@@ -454,7 +541,7 @@
                 <li><a href="#opiniones">Opiniones</a></li>
                 <li><a href="#ubicacion">Ubicación</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
     <section class="hero">
@@ -743,10 +830,8 @@
     </footer>
 
     <script>
-        // ⚠️ PEGA AQUÍ TU URL COMPLETA DE GOOGLE APPS SCRIPT (TERMINADA EN /exec)
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3WC_r09cgXhY9w62anj5ig-DOGQuEyy-J2o-xgc6P7ujqYjHwWyviS08j_MP-q_U/exec';
+        const SCRIPT_URL = 'TU_URL_DE_APPS_SCRIPT_AQUI';
 
-        // Función para cargar comentarios desde la planilla
         async function cargarComentarios() {
             const lista = document.getElementById('listaComentarios');
             try {
@@ -778,7 +863,6 @@
             }
         }
 
-        // Evento para enviar un nuevo comentario
         document.getElementById('reviewForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('btnEnviar');
@@ -792,15 +876,14 @@
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Requerido por restricciones de Google Apps Script
+                    mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nombre, comentario, puntuacion: parseInt(puntuacion) })
                 });
 
-                // Limpiar formulario y recargar
                 document.getElementById('reviewForm').reset();
                 alert('¡Muchas gracias por tu opinión!');
-                setTimeout(cargarComentarios, 1000); // Pequeña espera para dar tiempo a la escritura
+                setTimeout(cargarComentarios, 1000);
             } catch (error) {
                 alert('Hubo un error al enviar tu comentario.');
             } finally {
@@ -809,7 +892,13 @@
             }
         });
 
-        // Cargar las opiniones inmediatamente al abrir la página
+        // Cerrar menú automáticamente en celular al hacer clic en una sección
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('menu-toggle').checked = false;
+            });
+        });
+
         window.addEventListener('DOMContentLoaded', cargarComentarios);
     </script>
 </body>
