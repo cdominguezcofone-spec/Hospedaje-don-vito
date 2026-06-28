@@ -16,9 +16,8 @@
             text-align: center !important;
             color: white !important;
             overflow: hidden !important;
-            background-color: #1a202c !important; /* Color oscuro de respaldo de fondo */
+            background-color: #1a202c !important;
         }
-        /* Contenedor de las imágenes deslizantes */
         .slider-container {
             position: absolute !important;
             top: 0 !important;
@@ -36,9 +35,8 @@
             object-fit: cover !important;
             object-position: center center !important;
             opacity: 0 !important;
-            transition: opacity 1.2s ease-in-out !important; /* Transición suave de fundido */
+            transition: opacity 1.2s ease-in-out !important;
         }
-        /* Clase activa que muestra la foto actual */
         .slide.active {
             opacity: 1 !important;
         }
@@ -95,10 +93,12 @@
                 <img src="https://docs.google.com/thumbnail?id=1c_sxBmbR9aVeB1fTu9aPkxsZPPNbBBTx&sz=w800" alt="Patio">
                 <p>Amplio Jardín</p>
             </div>
+            
             <div class="gallery-item">
-                <img src="https://docs.google.com/uc?id=1Qh5aZChQLIwRhvofLozi0afWPiF46Y2L" alt="Parrilla">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Sector de Parrilla">
                 <p>Sector de Parrilla</p>
             </div>
+
             <div class="gallery-item">
                 <img src="https://docs.google.com/thumbnail?id=1YWnNLMyA3S62RSE1FZUzqYWjPJnqs2BL&sz=w800" alt="Fogata 1">
                 <p>Espacio de Fogón</p>
@@ -187,10 +187,9 @@
     </section>
 
     <script>
-        // Lógica del Carrusel Automático de Portada
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-        const slideInterval = 4000; // Cambia de foto cada 4 segundos
+        const slideInterval = 4000;
 
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
@@ -200,7 +199,6 @@
 
         setInterval(nextSlide, slideInterval);
 
-        // Mantener la lógica previa de tu simulador de precios
         const bookingForm = document.getElementById('bookingForm');
         if (bookingForm) {
             const nightsInput = document.getElementById('nights');
