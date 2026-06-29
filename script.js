@@ -67,33 +67,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
                 // --- 3.2 Envío de la reserva ---
-                // --- 3.2 Envío de la reserva (CORREGIDO) ---
-            // --- 3.2 Envío de la reserva ---
-btn.innerText = 'Enviando a Graciela...';
-const nombre = document.getElementById('nombre').value;
-const telefono = document.getElementById('telefono').value;
+                btn.innerText = 'Enviando a Graciela...';
+                const nombre = document.getElementById('nombre').value;
+                const telefono = document.getElementById('telefono').value;
 
-// Enviamos los datos al Google Script (manteniendo tu lógica)
-await fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nombre, telefono, checkin, checkout })
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre, telefono, checkin, checkout })
+                });
+
+                // --- CORRECCIÓN APLICADA AQUÍ ---
+                const mensaje = `Hola Graciela! Quiero realizar una nueva reserva:\n\n👤 *Nombre:* ${nombre}\n📞 *Tel:* ${telefono}\n🗓️ *Check-in:* ${checkin}\n📅 *Check-out:* ${checkout}`;
+                window.open(`https://wa.me/5491154523758?text=${encodeURIComponent(mensaje)}`, '_blank');
+                // --------------------------------
+
+                alert('¡Solicitud registrada correctamente! Se abrirá WhatsApp para confirmar con Graciela.');
+                reservaForm.reset();
+                btn.disabled = false;
+                btn.innerText = 'Enviar Solicitud y Reservar';
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un error al enviar. Intenta nuevamente.");
+                btn.disabled = false;
+                btn.innerText = 'Enviar Solicitud y Reservar';
+            }
+        });
+    }
 });
-
-// CORRECCIÓN: Usamos encodeURIComponent para que los saltos de línea y emojis se procesen bien
-const mensaje = `Hola Graciela! Quiero realizar una nueva reserva:
-
-👤 *Nombre:* ${nombre}
-📞 *Tel:* ${telefono}
-🗓️ *Check-in:* ${checkin}
-📅 *Check-out:* ${checkout}`;
-
-const urlWhatsApp = `https://wa.me/5491154523758?text=${encodeURIComponent(mensaje)}`;
-
-window.open(urlWhatsApp, '_blank');
-
-alert('¡Solicitud registrada correctamente! Se abrirá WhatsApp para confirmar con Graciela.');
-reservaForm.reset();
-btn.disabled = false;
-btn.innerText = 'Enviar Solicitud y Reservar';
