@@ -829,12 +829,57 @@
             </div>
         </section>
 
-        <!-- SECCIÓN DE CALENDARIO -->
         <section id="reservas" class="reserva-section">
-            <h2 class="section-title">Calendario de Disponibilidad</h2>
-            <div class="calendar-container">
-                <iframe src="https://calendar.google.com/calendar/embed?src=hospedajedonvito@gmail.com&ctz=America/Argentina/Buenos_Aires" class="calendar-iframe"></iframe>
-            </div>
+    <h2 class="section-title">Solicitar Reserva</h2>
+    <form id="reservaForm" class="reserva-form">
+        <input type="text" id="nombre" placeholder="Nombre y Apellido" required>
+        <input type="tel" id="telefono" placeholder="Teléfono" required>
+        <label style="text-align:left; font-weight:bold;">Fecha Check-in:</label>
+        <input type="date" id="checkin" required>
+        <label style="text-align:left; font-weight:bold;">Fecha Check-out:</label>
+        <input type="date" id="checkout" required>
+        <button type="submit" class="btn-submit" id="btnEnviar">Enviar Solicitud y Reservar</button>
+    </form>
+</section>
+
+<script>
+    // URL del Google Apps Script
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzKyR1N142pR1fm_iU2jlmL8NbrgHimhxFUB3cNLirS_DFHV0X9nt8KZpRPnug6bCsf/exec';
+
+    document.getElementById('reservaForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btnEnviar');
+        btn.disabled = true;
+        btn.innerText = 'Enviando a Graciela...';
+
+        const nombre = document.getElementById('nombre').value;
+        const telefono = document.getElementById('telefono').value;
+        const checkin = document.getElementById('checkin').value;
+        const checkout = document.getElementById('checkout').value;
+
+        try {
+            // 1. Enviar datos a Google Sheets
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, telefono, checkin, checkout })
+            });
+
+            // 2. Abrir WhatsApp con el mensaje pre-escrito
+            const msg = `Hola Graciela! Quiero realizar una nueva reserva:%0A%0A👤 *Nombre:* ${nombre}%0A📞 *Tel:* ${telefono}%0A🗓️ *Check-in:* ${checkin}%0A📅 *Check-out:* ${checkout}`;
+            window.open(`https://wa.me/5491154523758?text=${msg}`, '_blank');
+
+            alert('¡Solicitud registrada correctamente! Se abrirá WhatsApp para confirmar con Graciela.');
+            document.getElementById('reservaForm').reset();
+        } catch (error) {
+            alert('Hubo un error al enviar la reserva. Por favor intenta nuevamente.');
+        } finally {
+            btn.disabled = false;
+            btn.innerText = 'Enviar Solicitud y Reservar';
+        }
+    });
+</script>
         </section>
 
         <!-- SECCIÓN DE COMENTARIOS -->
