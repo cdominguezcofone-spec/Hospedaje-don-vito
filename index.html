@@ -315,6 +315,11 @@
             color: var(--text);
         }
 
+        /* Calendar Section */
+        .reserva-section { background: var(--white); padding: 40px 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 60px; text-align: center; }
+        .calendar-container { max-width: 600px; margin: 20px auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .calendar-iframe { width: 100%; height: 500px; border: none; }
+
         /* Contact Section */
         .contact-section {
             background: var(--white);
@@ -567,6 +572,7 @@
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#galeria">Instalaciones</a></li>
                 <li><a href="#informacion">Información</a></li>
+                <li><a href="#reservas">Reservas</a></li>
                 <li><a href="#opiniones">Opiniones</a></li>
                 <li><a href="#contacto">Contacto</a></li>
                 <li><a href="#ubicacion">Ubicación</a></li>
@@ -820,6 +826,14 @@
                     <li><span class="label">Cultura Local:</span> <span>Tradición alfarera y ladrillera</span></li>
                     <li><span class="label">Para Comer:</span> <span>Recomendamos visitar Casa Gallo</span></li>
                 </ul>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CALENDARIO -->
+        <section id="reservas" class="reserva-section">
+            <h2 class="section-title">Calendario de Disponibilidad</h2>
+            <div class="calendar-container">
+                <iframe src="https://calendar.google.com/calendar/embed?src=hospedajedonvito@gmail.com&ctz=America/Argentina/Buenos_Aires" class="calendar-iframe"></iframe>
             </div>
         </section>
 
