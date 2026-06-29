@@ -752,11 +752,11 @@
                 </div>
 
                 <div class="gallery-item">
-    <img class="gallery-img" src="https://lh3.googleusercontent.com/d/1tw0wYhz7eQVxyYfyTKlEUiv0IuoBbSEa" alt="Mesada">
-    <div class="gallery-info">
-        <h4>Detalle de Cocina</h4>
-        <p>Funcionalidad y comodidad en cada rincón.</p>
-    </div>
+                    <img class="gallery-img" src="https://lh3.googleusercontent.com/d/1tw0wYhz7eQVxyYfyTKlEUiv0IuoBbSEa" alt="Mesada">
+                    <div class="gallery-info">
+                        <h4>Detalle de Cocina</h4>
+                        <p>Funcionalidad y comodidad en cada rincón.</p>
+                    </div>
                 </div>
 
                 <div class="gallery-item">
@@ -913,37 +913,32 @@
             btn.disabled = true;
             btn.innerText = 'Enviando...';
 
-            const nombre = document.getElementById('formNombre').value;
-            const comentario = document.getElementById('formComentario').value;
-            const puntuacion = document.querySelector('input[name="puntuacion"]:checked').value;
+            const datos = {
+                nombre: document.getElementById('formNombre').value,
+                puntuacion: document.querySelector('input[name="puntuacion"]:checked').value,
+                comentario: document.getElementById('formComentario').value
+            };
 
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nombre, comentario, puntuacion: parseInt(puntuacion) })
+                    body: JSON.stringify(datos)
                 });
-
+                
+                alert('¡Gracias por tu comentario!');
                 document.getElementById('reviewForm').reset();
-                alert('¡Muchas gracias por tu opinión!');
-                setTimeout(cargarComentarios, 1000);
+                cargarComentarios(); 
             } catch (error) {
-                alert('Hubo un error al enviar tu comentario.');
+                alert('Hubo un error al enviar el comentario.');
             } finally {
                 btn.disabled = false;
                 btn.innerText = 'Enviar Comentario';
             }
         });
 
-        // Cerrar menú automáticamente en celular al hacer clic en una sección
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('menu-toggle').checked = false;
-            });
-        });
-
-        window.addEventListener('DOMContentLoaded', cargarComentarios);
+        cargarComentarios();
     </script>
 </body>
 </html>
